@@ -1,2 +1,2 @@
 <?php
-print_r('test page')
+print_r('test page');
