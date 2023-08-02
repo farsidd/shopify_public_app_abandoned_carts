@@ -154,8 +154,9 @@ class InstallationController extends Controller
                     if ($accessToken !== false && $accessToken !== null) {
                         $shopDetails = $this->getShopDetailsFromShopify($accessToken, $shop);
                         $savePayloadToDB = $this->saveStoreDetailsToDatabase($shopDetails, $accessToken);
-                        if ($savePayloadToDB) {
-                            return Redirect::to(config('app.ngrok_url') . 'shopify/auth/complete');
+                        if ($savePayloadToDB['success']) {
+                            $request->session()->flash('flash.banner', 'You login credentials sent to your store email:' ." ". $savePayloadToDB['email']);
+                            return redirect()->route('login')->banner('App Installed Sucessfully! You login credentials sent to your store email:' ." ". '<b>'.$savePayloadToDB['email'].'</b>');
                         } else {
                             Log::info('Error while saving the shop object record in database');
                             Log::info($savePayloadToDB);
@@ -292,10 +293,7 @@ class InstallationController extends Controller
                 } catch (Exception $e) {
                     Log::info($e->getMessage() . " " . $e->getLine());
                 }
-            
-
-
-            return true;
+            return ['success' => true, 'email' => $latestInsertedUserRecord->email];
         } catch (Exception $e) {
             Log::info($e->getMessage() . " " . $e->getLine());
             return false;
