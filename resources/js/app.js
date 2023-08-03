@@ -16,6 +16,11 @@ const options = {
     
 };
 
+//importing prime/vue library for ui components
+import PrimeVue from 'primevue/config';
+import "primevue/resources/themes/lara-light-indigo/theme.css";
+import 'primeicons/primeicons.css';
+
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
 createInertiaApp({
@@ -26,6 +31,7 @@ createInertiaApp({
             .use(plugin)
             .use(ZiggyVue, Ziggy)
             .use(Toast, options)
+            .use(PrimeVue)
             .mount(el);
     },
     progress: {

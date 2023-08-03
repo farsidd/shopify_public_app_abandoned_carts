@@ -1,28 +1,17 @@
 <?php
 
 use App\Http\Controllers\InstallationController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\AbandonedCartController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+//These are the routes use for app installation purpose
 Route::prefix('shopify')->group(function() {
     Route::get('auth', [InstallationController::class, 'startInstallation']);
     Route::get('auth/redirect', [InstallationController::class, 'handleRedirect'])->name('app_install_redirect');
     Route::get('auth/complete', [InstallationController::class, 'shopifyAppInstallationCompleted'])->name('app_installion_complete');
 });
-Route::get('test', [TestController::class, 'index'])->name('test');
-
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -40,4 +29,5 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+    Route::get('abandoned/carts', [AbandonedCartController::class, 'index'])->name('abandoned/carts');
 });

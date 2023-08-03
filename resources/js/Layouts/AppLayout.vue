@@ -53,7 +53,7 @@ const logout = () => {
                                 </NavLink>
                             </div>
                             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink :href="route('test')" :active="route().current('test')">
+                                <NavLink :href="route('abandoned/carts')" :active="route().current('abandoned/carts')">
                                     Abandoned Carts
                                 </NavLink>
                             </div>
@@ -200,6 +200,11 @@ const logout = () => {
                     <div class="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink :href="route('dashboard')" :active="route().current('dashboard')">
                             Dashboard
+                        </ResponsiveNavLink>
+                    </div>
+                    <div class="pt-2 pb-3 space-y-1">
+                        <ResponsiveNavLink :href="route('abandoned/carts')" :active="route().current('abandoned/carts')">
+                            Abandoned Cart
                         </ResponsiveNavLink>
                     </div>
 

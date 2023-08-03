@@ -59,4 +59,9 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function store()
+    {
+        return $this->belongsTo(Store::class, 'store_id', 'table_id');
+    }
 }
